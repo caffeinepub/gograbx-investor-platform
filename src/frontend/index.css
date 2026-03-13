@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/assets/fonts/Satoshi.woff2") format("woff2");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.625rem;
+    /* Electric Night City - dark mode */
+    --background: 0.08 0.01 260;
+    --foreground: 0.96 0.01 260;
+    --card: 0.11 0.015 260;
+    --card-foreground: 0.95 0.01 260;
+    --popover: 0.13 0.015 260;
+    --popover-foreground: 0.95 0.01 260;
+    --primary: 0.72 0.18 195;
+    --primary-foreground: 0.08 0.01 260;
+    --secondary: 0.65 0.18 55;
+    --secondary-foreground: 0.08 0.01 260;
+    --destructive: 0.62 0.22 25;
+    --destructive-foreground: 0.96 0.01 260;
+    --muted: 0.15 0.01 260;
+    --muted-foreground: 0.56 0.04 260;
+    --accent: 0.55 0.14 295;
+    --accent-foreground: 0.96 0.01 260;
+    --border: 0.28 0.04 195;
+    --input: 0.18 0.02 260;
+    --ring: 0.72 0.18 195;
+    --chart-1: 0.72 0.18 195;
+    --chart-2: 0.65 0.18 55;
+    --chart-3: 0.55 0.14 295;
+    --chart-4: 0.7 0.2 160;
+    --chart-5: 0.65 0.22 25;
+    --sidebar: 0.1 0.012 260;
+    --sidebar-foreground: 0.95 0.01 260;
+    --sidebar-primary: 0.72 0.18 195;
+    --sidebar-primary-foreground: 0.08 0.01 260;
+    --sidebar-accent: 0.15 0.015 260;
+    --sidebar-accent-foreground: 0.95 0.01 260;
+    --sidebar-border: 0.28 0.04 195;
+    --sidebar-ring: 0.72 0.18 195;
+  }
+
+  /* Light mode overrides */
+  .light {
+    --background: 0.97 0.006 240;
+    --foreground: 0.12 0.02 260;
+    --card: 0.99 0.004 240;
+    --card-foreground: 0.12 0.02 260;
+    --popover: 0.99 0.004 240;
+    --popover-foreground: 0.12 0.02 260;
+    --primary: 0.48 0.18 195;
+    --primary-foreground: 0.99 0.004 240;
+    --secondary: 0.52 0.18 55;
+    --secondary-foreground: 0.99 0.004 240;
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.99 0.004 240;
+    --muted: 0.93 0.012 240;
+    --muted-foreground: 0.44 0.05 240;
+    --accent: 0.88 0.06 195;
+    --accent-foreground: 0.12 0.02 260;
+    --border: 0.82 0.06 195;
+    --input: 0.93 0.012 240;
+    --ring: 0.48 0.18 195;
+    --chart-1: 0.48 0.18 195;
+    --chart-2: 0.52 0.18 55;
+    --chart-3: 0.48 0.14 295;
+    --chart-4: 0.5 0.18 160;
+    --chart-5: 0.52 0.22 25;
+    --sidebar: 0.97 0.006 240;
+    --sidebar-foreground: 0.12 0.02 260;
+    --sidebar-primary: 0.48 0.18 195;
+    --sidebar-primary-foreground: 0.99 0.004 240;
+    --sidebar-accent: 0.93 0.012 240;
+    --sidebar-accent-foreground: 0.12 0.02 260;
+    --sidebar-border: 0.82 0.06 195;
+    --sidebar-ring: 0.48 0.18 195;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+@layer utilities {
+  /* Floating orb animations */
+  @keyframes orb-float-1 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.45; }
+    33% { transform: translate(60px, -40px) scale(1.1); opacity: 0.3; }
+    66% { transform: translate(-30px, 30px) scale(0.9); opacity: 0.5; }
+  }
+  @keyframes orb-float-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.35; }
+    33% { transform: translate(-50px, 60px) scale(1.15); opacity: 0.25; }
+    66% { transform: translate(40px, -20px) scale(0.85); opacity: 0.4; }
+  }
+  @keyframes orb-float-3 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+    50% { transform: translate(35px, 50px) scale(1.2); opacity: 0.2; }
+  }
+  @keyframes pulseGlow {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.2); opacity: 0.45; }
+  }
+  @keyframes floatMove {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(30px, -18px); }
+    50% { transform: translate(12px, 16px); }
+    75% { transform: translate(-22px, -12px); }
+    100% { transform: translate(0, 0); }
+  }
+  @keyframes routeDash {
+    to { stroke-dashoffset: -120; }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  @keyframes orbitPulse {
+    0%, 100% { box-shadow: 0 0 0 0 oklch(0.72 0.18 195 / 0.35); }
+    50% { box-shadow: 0 0 0 12px oklch(0.72 0.18 195 / 0); }
+  }
+  @keyframes gridPulse {
+    0%, 100% { opacity: 0.08; }
+    50% { opacity: 0.14; }
+  }
+
+  .orb-1 { animation: orb-float-1 18s ease-in-out infinite; }
+  .orb-2 { animation: orb-float-2 22s ease-in-out infinite; }
+  .orb-3 { animation: orb-float-3 16s ease-in-out infinite; }
+  .route { stroke-dasharray: 8 10; animation: routeDash 8s linear infinite; }
+  .bike-float-1 { animation: floatMove 8s ease-in-out infinite; }
+  .bike-float-2 { animation: floatMove 10s ease-in-out infinite reverse; }
+  .bike-float-3 { animation: floatMove 9s ease-in-out infinite; }
+  .bike-float-4 { animation: floatMove 11s ease-in-out infinite reverse; }
+  .bike-float-5 { animation: floatMove 7s ease-in-out infinite; }
+  .pulse-dot { animation: pulseGlow 2.2s ease-in-out infinite; }
+  .asset-ring { animation: orbitPulse 2.4s ease-in-out infinite; }
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      oklch(0.72 0.18 195 / 0.3),
+      oklch(0.78 0.2 195 / 0.8),
+      oklch(0.72 0.18 195 / 0.3)
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+  }
+  .map-grid { animation: gridPulse 4s ease-in-out infinite; }
+}
