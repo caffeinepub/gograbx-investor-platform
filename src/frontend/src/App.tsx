@@ -6,6 +6,7 @@ import {
   useState,
 } from "react";
 import type { InvestorProfile } from "./backend.d";
+import BlueprintPage from "./components/BlueprintPage";
 import { useActor } from "./hooks/useActor";
 import { useInternetIdentity } from "./hooks/useInternetIdentity";
 
@@ -123,10 +124,12 @@ function DemoSelector({
   names,
   onSelect,
   loading,
+  onBackToWebsite,
 }: {
   names: string[];
   onSelect: (name: string) => void;
   loading: string | null;
+  onBackToWebsite?: () => void;
 }) {
   const icons = ["🏗️", "📦", "⚡"];
   const subtitles = [
@@ -137,6 +140,14 @@ function DemoSelector({
 
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-950 p-6 text-white">
+      <button
+        type="button"
+        data-ocid="login.back_to_website.button"
+        onClick={onBackToWebsite}
+        className="absolute left-4 top-4 z-20 flex items-center gap-1 rounded-xl bg-slate-800/60 px-3 py-2 text-sm text-slate-400 backdrop-blur transition hover:bg-slate-700/70 hover:text-white"
+      >
+        ← Back to Website
+      </button>
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(20,215,160,0.18),transparent),radial-gradient(ellipse_60%_50%_at_80%_80%,rgba(37,99,235,0.22),transparent)]" />
       <div className="absolute left-[12%] top-[18%] h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl" />
       <div className="absolute right-[10%] top-[30%] h-96 w-96 rounded-full bg-blue-600/10 blur-3xl" />
@@ -225,6 +236,7 @@ export default function GoGrabXFleetTracking() {
   const { actor, isFetching: actorFetching } = useActor();
 
   const [page, setPage] = useState<Page>("login");
+  const [showBlueprint, setShowBlueprint] = useState(true);
   const [selectedBikeId, setSelectedBikeId] = useState<string>("GGRX-024");
   const [demoNames, setDemoNames] = useState<string[]>([]);
   const [profile, setProfile] = useState<InvestorProfile | null>(null);
@@ -659,6 +671,16 @@ export default function GoGrabXFleetTracking() {
             </button>
           ))}
         </div>
+        <div className="mt-4 border-t border-slate-800 pt-4">
+          <button
+            type="button"
+            data-ocid="nav.back_to_website.button"
+            onClick={() => setShowBlueprint(true)}
+            className="flex w-full items-center gap-2 rounded-2xl px-4 py-3 text-left text-sm text-slate-500 transition hover:bg-slate-800/60 hover:text-slate-300"
+          >
+            ← Main Website
+          </button>
+        </div>
       </div>
     );
   };
@@ -666,6 +688,14 @@ export default function GoGrabXFleetTracking() {
   // ── Render: Login ─────────────────────────────────────────────────────────
   const renderLogin = () => (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-950 p-6 text-white">
+      <button
+        type="button"
+        data-ocid="login.back_to_website.button"
+        onClick={() => setShowBlueprint(true)}
+        className="absolute left-4 top-4 z-20 flex items-center gap-1 rounded-xl bg-slate-800/60 px-3 py-2 text-sm text-slate-400 backdrop-blur transition hover:bg-slate-700/70 hover:text-white"
+      >
+        ← Back to Website
+      </button>
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(20,215,160,0.18),transparent),radial-gradient(ellipse_60%_50%_at_80%_80%,rgba(37,99,235,0.22),transparent),radial-gradient(ellipse_40%_40%_at_20%_70%,rgba(249,115,22,0.12),transparent)]" />
       <div className="absolute left-[12%] top-[18%] h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl" />
       <div className="absolute right-[10%] top-[30%] h-96 w-96 rounded-full bg-blue-600/10 blur-3xl" />
@@ -805,6 +835,14 @@ export default function GoGrabXFleetTracking() {
   // ── Render: Admin Login ───────────────────────────────────────────────────
   const renderAdminLogin = () => (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-950 p-6 text-white">
+      <button
+        type="button"
+        data-ocid="login.back_to_website.button"
+        onClick={() => setShowBlueprint(true)}
+        className="absolute left-4 top-4 z-20 flex items-center gap-1 rounded-xl bg-slate-800/60 px-3 py-2 text-sm text-slate-400 backdrop-blur transition hover:bg-slate-700/70 hover:text-white"
+      >
+        ← Back to Website
+      </button>
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(249,115,22,0.12),transparent),radial-gradient(ellipse_60%_50%_at_80%_80%,rgba(37,99,235,0.18),transparent)]" />
       <div className="absolute left-[12%] top-[18%] h-72 w-72 rounded-full bg-orange-500/8 blur-3xl" />
       <div className="absolute right-[10%] top-[30%] h-96 w-96 rounded-full bg-blue-600/10 blur-3xl" />
@@ -2281,6 +2319,9 @@ export default function GoGrabXFleetTracking() {
 
   // ── Route ─────────────────────────────────────────────────────────────────
 
+  if (showBlueprint)
+    return <BlueprintPage onEnterPortal={() => setShowBlueprint(false)} />;
+
   if (page === "adminLogin") return renderAdminLogin();
   if (page === "adminDashboard") return renderAdminDashboard();
 
@@ -2292,6 +2333,7 @@ export default function GoGrabXFleetTracking() {
         names={demoNames}
         onSelect={handleSelectDemo}
         loading={loadingDemo}
+        onBackToWebsite={() => setShowBlueprint(true)}
       />
     );
   }
