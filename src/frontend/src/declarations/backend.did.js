@@ -8,10 +8,124 @@
 
 import { IDL } from '@icp-sdk/core/candid';
 
-export const idlService = IDL.Service({});
+export const UserRole = IDL.Variant({
+  'admin' : IDL.Null,
+  'user' : IDL.Null,
+  'guest' : IDL.Null,
+});
+export const UserProfile = IDL.Record({ 'name' : IDL.Text });
+export const FamilyMember = IDL.Record({
+  'name' : IDL.Text,
+  'role' : IDL.Text,
+  'share' : IDL.Int,
+  'amount' : IDL.Int,
+});
+export const Bike = IDL.Record({
+  'id' : IDL.Text,
+  'status' : IDL.Text,
+  'todayEarnings' : IDL.Nat,
+  'legalNo' : IDL.Text,
+  'monthEarnings' : IDL.Nat,
+  'investedAmount' : IDL.Nat,
+  'ownershipPercentage' : IDL.Nat,
+});
+export const Payout = IDL.Record({
+  'status' : IDL.Text,
+  'date' : IDL.Text,
+  'investorShare' : IDL.Int,
+  'grossRevenue' : IDL.Int,
+  'bikeId' : IDL.Text,
+});
+export const InvestorProfile = IDL.Record({
+  'city' : IDL.Text,
+  'familyMembers' : IDL.Vec(FamilyMember),
+  'portfolioValue' : IDL.Nat,
+  'bikes' : IDL.Vec(Bike),
+  'totalPayout' : IDL.Nat,
+  'totalBikes' : IDL.Nat,
+  'payouts' : IDL.Vec(Payout),
+  'investorName' : IDL.Text,
+});
+
+export const idlService = IDL.Service({
+  '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+  'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+  'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
+  'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+  'getDemoInvestors' : IDL.Func([], [IDL.Vec(IDL.Text)], ['query']),
+  'getMyProfile' : IDL.Func([], [IDL.Opt(InvestorProfile)], ['query']),
+  'getUserProfile' : IDL.Func(
+      [IDL.Principal],
+      [IDL.Opt(UserProfile)],
+      ['query'],
+    ),
+  'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
+  'loginAsDemo' : IDL.Func([IDL.Text], [], []),
+  'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
+  'seedDemoData' : IDL.Func([], [], []),
+  'upsertMyProfile' : IDL.Func([InvestorProfile], [], []),
+});
 
 export const idlInitArgs = [];
 
-export const idlFactory = ({ IDL }) => { return IDL.Service({}); };
+export const idlFactory = ({ IDL }) => {
+  const UserRole = IDL.Variant({
+    'admin' : IDL.Null,
+    'user' : IDL.Null,
+    'guest' : IDL.Null,
+  });
+  const UserProfile = IDL.Record({ 'name' : IDL.Text });
+  const FamilyMember = IDL.Record({
+    'name' : IDL.Text,
+    'role' : IDL.Text,
+    'share' : IDL.Int,
+    'amount' : IDL.Int,
+  });
+  const Bike = IDL.Record({
+    'id' : IDL.Text,
+    'status' : IDL.Text,
+    'todayEarnings' : IDL.Nat,
+    'legalNo' : IDL.Text,
+    'monthEarnings' : IDL.Nat,
+    'investedAmount' : IDL.Nat,
+    'ownershipPercentage' : IDL.Nat,
+  });
+  const Payout = IDL.Record({
+    'status' : IDL.Text,
+    'date' : IDL.Text,
+    'investorShare' : IDL.Int,
+    'grossRevenue' : IDL.Int,
+    'bikeId' : IDL.Text,
+  });
+  const InvestorProfile = IDL.Record({
+    'city' : IDL.Text,
+    'familyMembers' : IDL.Vec(FamilyMember),
+    'portfolioValue' : IDL.Nat,
+    'bikes' : IDL.Vec(Bike),
+    'totalPayout' : IDL.Nat,
+    'totalBikes' : IDL.Nat,
+    'payouts' : IDL.Vec(Payout),
+    'investorName' : IDL.Text,
+  });
+  
+  return IDL.Service({
+    '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+    'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+    'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
+    'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+    'getDemoInvestors' : IDL.Func([], [IDL.Vec(IDL.Text)], ['query']),
+    'getMyProfile' : IDL.Func([], [IDL.Opt(InvestorProfile)], ['query']),
+    'getUserProfile' : IDL.Func(
+        [IDL.Principal],
+        [IDL.Opt(UserProfile)],
+        ['query'],
+      ),
+    'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
+    'loginAsDemo' : IDL.Func([IDL.Text], [], []),
+    'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
+    'seedDemoData' : IDL.Func([], [], []),
+    'upsertMyProfile' : IDL.Func([InvestorProfile], [], []),
+  });
+};
 
 export const init = ({ IDL }) => { return []; };
