@@ -580,46 +580,112 @@ export default function GoGrabXFleetTracking() {
           background-size: 200% 100%;
           animation: shimmer 3s linear infinite;
         }
+        @keyframes orbDrift1 { 0% { transform: translate(0,0) scale(1); } 33% { transform: translate(40px,-30px) scale(1.1); } 66% { transform: translate(-20px,20px) scale(0.95); } 100% { transform: translate(0,0) scale(1); } }
+        @keyframes orbDrift2 { 0% { transform: translate(0,0) scale(1); } 33% { transform: translate(-50px,30px) scale(1.05); } 66% { transform: translate(30px,-20px) scale(1.12); } 100% { transform: translate(0,0) scale(1); } }
+        @keyframes orbDrift3 { 0% { transform: translate(0,0) scale(1); } 50% { transform: translate(20px,-40px) scale(1.08); } 100% { transform: translate(0,0) scale(1); } }
+        @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes cardEntrance { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes metricPop { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
+        @keyframes gridFloat { 0% { transform: translate(0,0); } 50% { transform: translate(0,18px); } 100% { transform: translate(0,0); } }
+        .orb-1 { animation: orbDrift1 18s ease-in-out infinite; }
+        .orb-2 { animation: orbDrift2 22s ease-in-out infinite; }
+        .orb-3 { animation: orbDrift3 14s ease-in-out infinite; }
+        .login-hero-anim { animation: fadeSlideUp 0.8s cubic-bezier(0.22,1,0.36,1) both; }
+        .login-card-1 { animation: cardEntrance 0.5s cubic-bezier(0.22,1,0.36,1) 0.1s both; }
+        .login-card-2 { animation: cardEntrance 0.5s cubic-bezier(0.22,1,0.36,1) 0.18s both; }
+        .login-card-3 { animation: cardEntrance 0.5s cubic-bezier(0.22,1,0.36,1) 0.26s both; }
+        .login-card-4 { animation: cardEntrance 0.5s cubic-bezier(0.22,1,0.36,1) 0.34s both; }
+        .login-card-5 { animation: cardEntrance 0.5s cubic-bezier(0.22,1,0.36,1) 0.42s both; }
+        .metric-1 { animation: metricPop 0.6s cubic-bezier(0.22,1,0.36,1) 0.3s both; }
+        .metric-2 { animation: metricPop 0.6s cubic-bezier(0.22,1,0.36,1) 0.45s both; }
+        .metric-3 { animation: metricPop 0.6s cubic-bezier(0.22,1,0.36,1) 0.6s both; }
+        .investor-card-hover {
+          transition: all 0.25s cubic-bezier(0.22,1,0.36,1);
+          border: 1px solid rgba(0,229,255,0.12);
+          background: rgba(15,23,42,0.7);
+        }
+        .investor-card-hover:hover {
+          border-color: rgba(0,229,255,0.55);
+          background: rgba(0,229,255,0.06);
+          box-shadow: 0 0 28px rgba(0,229,255,0.15), 0 8px 32px rgba(0,0,0,0.4);
+          transform: translateY(-2px) scale(1.012);
+        }
+        .city-grid-bg {
+          background-image: linear-gradient(rgba(0,229,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,0.06) 1px, transparent 1px);
+          background-size: 48px 48px;
+          animation: gridFloat 8s ease-in-out infinite;
+        }
       `}</style>
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,.18),transparent_28%),radial-gradient(circle_at_bottom_left,rgba(249,115,22,.15),transparent_24%)]" />
 
       <div className="relative mx-auto max-w-7xl px-6 py-8">
-        <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/70 px-3 py-1 text-xs text-slate-300">
-              <span className="pulse-dot h-2 w-2 rounded-full bg-emerald-400" />
-              Live Fleet Intelligence + Investor Portfolio
+        <div className="mb-8 rounded-3xl border border-cyan-500/20 bg-slate-900/60 backdrop-blur-xl p-6 relative overflow-hidden shadow-2xl shadow-cyan-500/10">
+          {/* Decorative orbs */}
+          <div className="absolute -top-8 -right-8 w-48 h-48 rounded-full bg-cyan-500/10 blur-3xl orb-1 pointer-events-none" />
+          <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-blue-500/10 blur-3xl orb-2 pointer-events-none" />
+
+          <div className="relative flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs text-cyan-300 font-medium">
+                <span className="pulse-dot h-2 w-2 rounded-full bg-emerald-400" />
+                ● LIVE · Fleet Intelligence + Investor Portfolio
+              </div>
+              <h1 className="mt-3 bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent font-display text-4xl font-bold tracking-tight md:text-5xl">
+                GoGrabX Investor Platform
+              </h1>
+              <p className="mt-3 max-w-2xl text-sm text-slate-400 md:text-base">
+                A founder-demo style investor operating system for EV bike
+                ownership, payouts, co-ownership, maintenance, and expansion.
+              </p>
             </div>
-            <h1 className="mt-3 font-display text-4xl font-bold tracking-tight md:text-5xl">
-              GoGrabX Investor Platform
-            </h1>
-            <p className="mt-3 max-w-2xl text-sm text-slate-300 md:text-base">
-              A founder-demo style investor operating system for EV bike
-              ownership, payouts, co-ownership, maintenance, and expansion.
-            </p>
+
+            <div className="flex flex-col items-end gap-3">
+              <div className="rounded-2xl border border-cyan-500/30 bg-gradient-to-br from-cyan-900/40 to-blue-900/40 backdrop-blur px-5 py-4 shadow-xl shadow-cyan-500/10">
+                <div className="text-xs uppercase tracking-[0.2em] text-cyan-400/70">
+                  Investor Account
+                </div>
+                <div className="mt-2 font-display text-xl font-bold text-white drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]">
+                  {profile?.investorName ?? "—"}
+                </div>
+                <div className="mt-1 text-xs text-slate-400">
+                  {profile?.city ?? "—"} · Synced every 5 sec
+                </div>
+                <div className="mt-2 inline-flex items-center gap-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 px-2 py-0.5 text-xs text-emerald-400">
+                  ↑ +12.4% YTD
+                </div>
+              </div>
+              <button
+                type="button"
+                data-ocid="auth.logout.button"
+                onClick={handleLogout}
+                className="rounded-xl border border-slate-700/40 bg-slate-800/50 px-4 py-2 text-xs text-slate-500 hover:border-red-500/40 hover:text-red-400 transition"
+              >
+                Logout →
+              </button>
+            </div>
           </div>
 
-          <div className="flex flex-col items-end gap-3">
-            <div className="rounded-3xl border border-slate-800 bg-slate-900/70 px-5 py-4 shadow-2xl backdrop-blur">
-              <div className="text-xs uppercase tracking-[0.25em] text-slate-400">
-                Investor Account
+          {/* Live metrics bar */}
+          <div className="relative grid grid-cols-2 gap-0 border-t border-slate-700/40 mt-5 pt-5 md:grid-cols-4">
+            {[
+              { label: "Total Fleet", value: "47 Bikes" },
+              { label: "Active Now", value: "43" },
+              { label: "Monthly Yield", value: "₹2.4L" },
+              { label: "Cities", value: "3" },
+            ].map((stat, i) => (
+              <div
+                key={stat.label}
+                className={`px-4 py-1 ${i > 0 ? "border-l border-slate-700/50" : ""}`}
+              >
+                <div className="text-xs uppercase tracking-wider text-slate-500">
+                  {stat.label}
+                </div>
+                <div className="mt-1 font-display text-lg font-bold text-white">
+                  {stat.value}
+                </div>
               </div>
-              <div className="mt-2 font-display text-2xl font-semibold text-emerald-400">
-                {profile?.investorName ?? "—"}
-              </div>
-              <div className="mt-1 text-sm text-slate-400">
-                {profile?.city ?? "—"} • Synced every 5 sec
-              </div>
-            </div>
-            <button
-              type="button"
-              data-ocid="auth.logout.button"
-              onClick={handleLogout}
-              className="rounded-xl border border-slate-700/50 bg-slate-900/60 px-4 py-2 text-xs text-slate-400 transition hover:border-red-500/40 hover:text-red-400"
-            >
-              Logout →
-            </button>
+            ))}
           </div>
         </div>
 
@@ -686,118 +752,377 @@ export default function GoGrabXFleetTracking() {
   };
 
   // ── Render: Login ─────────────────────────────────────────────────────────
-  const renderLogin = () => (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-950 p-6 text-white">
-      <button
-        type="button"
-        data-ocid="login.back_to_website.button"
-        onClick={() => setShowBlueprint(true)}
-        className="absolute left-4 top-4 z-20 flex items-center gap-1 rounded-xl bg-slate-800/60 px-3 py-2 text-sm text-slate-400 backdrop-blur transition hover:bg-slate-700/70 hover:text-white"
-      >
-        ← Back to Website
-      </button>
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(20,215,160,0.18),transparent),radial-gradient(ellipse_60%_50%_at_80%_80%,rgba(37,99,235,0.22),transparent),radial-gradient(ellipse_40%_40%_at_20%_70%,rgba(249,115,22,0.12),transparent)]" />
-      <div className="absolute left-[12%] top-[18%] h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl" />
-      <div className="absolute right-[10%] top-[30%] h-96 w-96 rounded-full bg-blue-600/10 blur-3xl" />
-      <div className="absolute bottom-[15%] left-[35%] h-64 w-64 rounded-full bg-emerald-500/10 blur-3xl" />
-      <div
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(148,163,184,1) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,1) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
-      />
+  const renderLogin = () => {
+    const investors = [
+      {
+        name: "Ravi Kumar Family",
+        initials: "RK",
+        city: "Tanuku",
+        bikes: 5,
+        portfolio: "₹4.8L",
+        roi: "+12.4%",
+        roiColor: "#34d399",
+        accentColor: "#00e5ff",
+        gradientFrom: "#0e7490",
+        gradientTo: "#0891b2",
+      },
+      {
+        name: "Mahesh Group",
+        initials: "MG",
+        city: "Bhimavaram",
+        bikes: 3,
+        portfolio: "₹3.2L",
+        roi: "+9.8%",
+        roiColor: "#34d399",
+        accentColor: "#818cf8",
+        gradientFrom: "#4338ca",
+        gradientTo: "#6366f1",
+      },
+      {
+        name: "Lakshmi Investors",
+        initials: "LI",
+        city: "Tanuku",
+        bikes: 4,
+        portfolio: "₹3.8L",
+        roi: "+8.2%",
+        roiColor: "#34d399",
+        accentColor: "#f59e0b",
+        gradientFrom: "#b45309",
+        gradientTo: "#d97706",
+      },
+      {
+        name: "Kiran Ventures",
+        initials: "KV",
+        city: "Tanuku",
+        bikes: 2,
+        portfolio: "₹2.1L",
+        roi: "+15.1%",
+        roiColor: "#10b981",
+        accentColor: "#a78bfa",
+        gradientFrom: "#6d28d9",
+        gradientTo: "#7c3aed",
+      },
+      {
+        name: "GoGrabX Reserve",
+        initials: "GR",
+        city: "Tanuku",
+        bikes: 6,
+        portfolio: "₹6.2L",
+        roi: "+6.3%",
+        roiColor: "#34d399",
+        accentColor: "#00e5ff",
+        gradientFrom: "#0f4c75",
+        gradientTo: "#1b6ca8",
+      },
+    ];
+    const cardClasses = [
+      "login-card-1",
+      "login-card-2",
+      "login-card-3",
+      "login-card-4",
+      "login-card-5",
+    ];
+    return (
+      <div className="relative flex min-h-screen overflow-hidden bg-[#030712] text-white">
+        {/* Back to Website pill */}
+        <button
+          type="button"
+          data-ocid="login.back_to_website.button"
+          onClick={() => setShowBlueprint(true)}
+          className="absolute left-5 top-5 z-30 flex items-center gap-2 rounded-full border border-slate-700/60 bg-slate-900/80 px-4 py-2 text-xs font-medium text-slate-300 backdrop-blur transition hover:border-cyan-500/50 hover:text-cyan-300"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            className="h-3.5 w-3.5"
+            aria-hidden="true"
+          >
+            <path
+              d="M19 12H5M12 5l-7 7 7 7"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          Back to Website
+        </button>
 
-      <div className="relative w-full max-w-md">
-        <div className="mb-8 flex flex-col items-center gap-3">
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 to-blue-600 shadow-[0_0_40px_rgba(20,215,160,0.4)]">
-            <svg
-              role="img"
-              aria-label="GoGrabX logo"
-              viewBox="0 0 40 40"
-              fill="none"
-              className="h-8 w-8"
-            >
-              <path
-                d="M6 21C6 13.82 11.82 8 19 8H28V14H19C15.13 14 12 17.13 12 21C12 24.87 15.13 28 19 28C21.55 28 23.79 26.75 25.14 24.86H18V19H32C32 27.01 25.51 33.5 17.5 33.5C11.36 33.5 6 28.14 6 21Z"
-                fill="white"
-              />
-            </svg>
-          </div>
-          <div className="text-center">
-            <div className="font-display text-xl font-bold tracking-tight">
-              GoGrabX
+        {/* ── LEFT HERO PANEL ── */}
+        <div className="relative hidden lg:flex lg:w-[46%] flex-col justify-between overflow-hidden bg-[#040d1a] p-12">
+          {/* Animated city grid */}
+          <div className="city-grid-bg absolute inset-0 opacity-60" />
+          {/* Radial glow center */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_60%,rgba(0,229,255,0.10),transparent)]" />
+          {/* Top-right corner glow */}
+          <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-cyan-500/10 blur-3xl" />
+          {/* Bottom-left corner glow */}
+          <div className="absolute -bottom-16 -left-16 h-72 w-72 rounded-full bg-blue-600/10 blur-3xl" />
+          {/* Floating orbs */}
+          <div className="orb-1 absolute left-[20%] top-[25%] h-40 w-40 rounded-full bg-cyan-400/8 blur-2xl" />
+          <div className="orb-2 absolute right-[15%] top-[50%] h-56 w-56 rounded-full bg-indigo-500/10 blur-3xl" />
+          <div className="orb-3 absolute bottom-[20%] left-[35%] h-32 w-32 rounded-full bg-emerald-400/8 blur-2xl" />
+
+          {/* Logo */}
+          <div className="login-hero-anim relative z-10">
+            <div className="flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 to-blue-600 shadow-[0_0_32px_rgba(0,229,255,0.45)]">
+                <svg
+                  viewBox="0 0 40 40"
+                  fill="none"
+                  className="h-7 w-7"
+                  aria-label="GoGrabX logo"
+                  role="img"
+                >
+                  <path
+                    d="M6 21C6 13.82 11.82 8 19 8H28V14H19C15.13 14 12 17.13 12 21C12 24.87 15.13 28 19 28C21.55 28 23.79 26.75 25.14 24.86H18V19H32C32 27.01 25.51 33.5 17.5 33.5C11.36 33.5 6 28.14 6 21Z"
+                    fill="white"
+                  />
+                </svg>
+              </div>
+              <div>
+                <div className="font-display text-xl font-bold tracking-tight text-white">
+                  GoGrabX
+                </div>
+                <div className="text-[10px] uppercase tracking-[0.3em] text-cyan-400/80">
+                  Investor Portal
+                </div>
+              </div>
             </div>
-            <div className="text-xs uppercase tracking-[0.3em] text-cyan-400/80">
-              Investor Portal
+          </div>
+
+          {/* Main hero content */}
+          <div
+            className="relative z-10 flex-1 flex flex-col justify-center py-8"
+            style={{
+              animation:
+                "fadeSlideUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.1s both",
+            }}
+          >
+            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/25 bg-cyan-500/10 px-3 py-1.5 text-xs font-medium text-cyan-300 mb-6 w-fit">
+              <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-emerald-400 inline-block" />
+              Live Fleet · West Godavari, India
+            </div>
+            <h1 className="font-display text-5xl font-bold leading-[1.1] tracking-tight text-white mb-4">
+              India's EV
+              <br />
+              <span
+                style={{
+                  background:
+                    "linear-gradient(135deg, #00e5ff 0%, #34d399 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                Logistics
+              </span>
+              <br />
+              Revolution
+            </h1>
+            <p className="text-slate-400 text-base leading-relaxed max-w-xs mb-8">
+              Premium investment platform for EV bike fleet ownership in India's
+              tier-2 &amp; tier-3 markets. Real returns. Transparent data.
+            </p>
+
+            {/* Metric pills */}
+            <div className="flex flex-col gap-3">
+              <div className="metric-1 flex items-center gap-4 rounded-2xl border border-slate-700/50 bg-slate-900/60 px-5 py-4 backdrop-blur">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/15 text-cyan-400">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    className="h-5 w-5"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <div className="font-display text-2xl font-bold text-white">
+                    128
+                  </div>
+                  <div className="text-xs text-slate-400 uppercase tracking-wide">
+                    Active EV Bikes
+                  </div>
+                </div>
+              </div>
+              <div className="metric-2 flex items-center gap-4 rounded-2xl border border-slate-700/50 bg-slate-900/60 px-5 py-4 backdrop-blur">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-400">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    className="h-5 w-5"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <div className="font-display text-2xl font-bold text-white">
+                    3 Cities
+                  </div>
+                  <div className="text-xs text-slate-400 uppercase tracking-wide">
+                    Operational Markets
+                  </div>
+                </div>
+              </div>
+              <div className="metric-3 flex items-center gap-4 rounded-2xl border border-slate-700/50 bg-slate-900/60 px-5 py-4 backdrop-blur">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/15 text-amber-400">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    className="h-5 w-5"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <div className="font-display text-2xl font-bold text-white">
+                    ₹4.8L
+                  </div>
+                  <div className="text-xs text-slate-400 uppercase tracking-wide">
+                    Avg Portfolio Value
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Footer */}
+          <div
+            className="relative z-10"
+            style={{
+              animation: "fadeSlideUp 1s cubic-bezier(0.22,1,0.36,1) 0.5s both",
+            }}
+          >
+            <div className="flex items-center gap-2 text-xs text-slate-600">
+              <span className="h-px w-8 bg-slate-700 inline-block" />
+              Secured · End-to-End Encrypted · Live Data
             </div>
           </div>
         </div>
 
-        <div className="rounded-[2rem] bg-gradient-to-b from-cyan-500/20 via-slate-700/20 to-slate-800/10 p-px shadow-[0_32px_80px_rgba(0,0,0,0.5)]">
-          <div className="rounded-[calc(2rem-1px)] bg-slate-900/95 p-10 backdrop-blur-xl">
-            <h1 className="mb-2 font-display text-4xl font-bold tracking-tight">
-              Investor Login
-            </h1>
-            <p className="mb-8 text-slate-400">
-              Connect with Internet Identity to access your personalized EV bike
-              portfolio, earnings, and ownership certificates.
-            </p>
+        {/* ── RIGHT LOGIN PANEL ── */}
+        <div className="relative flex flex-1 flex-col justify-center overflow-y-auto bg-[#050e1a] px-6 py-24 sm:px-10 lg:py-16 lg:px-14">
+          {/* Subtle background texture */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(0,229,255,0.05),transparent)]" />
 
-            <p className="mb-6 text-sm text-slate-400">
-              Select your investor profile to access your personalized EV bike
-              portfolio, earnings, and ownership certificates.
-            </p>
+          <div className="relative z-10 w-full max-w-md mx-auto">
+            {/* Mobile logo */}
+            <div className="flex lg:hidden items-center gap-3 mb-10">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 shadow-[0_0_24px_rgba(0,229,255,0.4)]">
+                <svg
+                  viewBox="0 0 40 40"
+                  fill="none"
+                  className="h-6 w-6"
+                  aria-label="GoGrabX logo"
+                  role="img"
+                >
+                  <path
+                    d="M6 21C6 13.82 11.82 8 19 8H28V14H19C15.13 14 12 17.13 12 21C12 24.87 15.13 28 19 28C21.55 28 23.79 26.75 25.14 24.86H18V19H32C32 27.01 25.51 33.5 17.5 33.5C11.36 33.5 6 28.14 6 21Z"
+                    fill="white"
+                  />
+                </svg>
+              </div>
+              <div>
+                <div className="font-display text-lg font-bold text-white">
+                  GoGrabX
+                </div>
+                <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-400/80">
+                  Investor Portal
+                </div>
+              </div>
+            </div>
 
-            <div className="grid grid-cols-1 gap-3">
-              {[
-                {
-                  name: "Ravi Kumar Family",
-                  icon: "🏠",
-                  desc: "5 bikes · ₹4.8L portfolio",
-                },
-                {
-                  name: "Mahesh Group",
-                  icon: "🏢",
-                  desc: "3 bikes · ₹3.2L portfolio",
-                },
-                {
-                  name: "Lakshmi Investors",
-                  icon: "💼",
-                  desc: "4 bikes · ₹3.8L portfolio",
-                },
-                {
-                  name: "Kiran Ventures",
-                  icon: "🚀",
-                  desc: "2 bikes · ₹2.1L portfolio",
-                },
-                {
-                  name: "GoGrabX Reserve",
-                  icon: "🌐",
-                  desc: "6 bikes · ₹6.2L portfolio",
-                },
-              ].map(({ name, icon, desc }, idx) => (
+            <div
+              style={{
+                animation: "fadeSlideUp 0.7s cubic-bezier(0.22,1,0.36,1) both",
+              }}
+            >
+              <h2 className="font-display text-3xl font-bold tracking-tight text-white mb-1">
+                Select Your Portfolio
+              </h2>
+              <p className="text-slate-400 text-sm mb-8">
+                Choose your investor profile to access your personalized EV
+                fleet dashboard, earnings, and ownership certificates.
+              </p>
+            </div>
+
+            {/* Investor cards */}
+            <div className="flex flex-col gap-3">
+              {investors.map((inv, idx) => (
                 <button
-                  key={name}
+                  key={inv.name}
                   type="button"
                   data-ocid={`login.investor.item.${idx + 1}`}
-                  onClick={() => handleDirectLogin(name)}
-                  className="group flex items-center gap-4 rounded-xl border border-slate-700/60 bg-slate-800/50 px-4 py-3 text-left transition hover:border-cyan-500/50 hover:bg-slate-800 active:scale-[0.99]"
+                  onClick={() => handleDirectLogin(inv.name)}
+                  className={`investor-card-hover ${cardClasses[idx]} group relative flex items-center gap-4 rounded-2xl px-4 py-4 text-left w-full`}
                 >
-                  <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-slate-700/60 text-xl group-hover:bg-cyan-500/20 transition">
-                    {icon}
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <div className="font-semibold text-sm text-white leading-tight">
-                      {name}
-                    </div>
-                    <div className="text-xs text-slate-400 mt-0.5">{desc}</div>
+                  {/* Left accent bar */}
+                  <div
+                    className="absolute left-0 top-3 bottom-3 w-0.5 rounded-full opacity-80"
+                    style={{
+                      background: `linear-gradient(to bottom, ${inv.accentColor}, transparent)`,
+                    }}
+                  />
+
+                  {/* Avatar */}
+                  <div
+                    className="flex-shrink-0 flex h-12 w-12 items-center justify-center rounded-2xl text-white text-sm font-bold shadow-lg"
+                    style={{
+                      background: `linear-gradient(135deg, ${inv.gradientFrom}, ${inv.gradientTo})`,
+                      boxShadow: `0 0 16px ${inv.accentColor}30`,
+                    }}
+                  >
+                    {inv.initials}
                   </div>
+
+                  {/* Info */}
+                  <div className="flex-1 min-w-0">
+                    <div className="font-semibold text-sm text-white leading-tight mb-0.5">
+                      {inv.name}
+                    </div>
+                    <div className="flex items-center gap-2 text-xs text-slate-400">
+                      <span>{inv.city}</span>
+                      <span className="h-1 w-1 rounded-full bg-slate-600 inline-block" />
+                      <span>{inv.bikes} bikes</span>
+                      <span className="h-1 w-1 rounded-full bg-slate-600 inline-block" />
+                      <span>{inv.portfolio}</span>
+                    </div>
+                  </div>
+
+                  {/* ROI badge */}
+                  <div className="flex-shrink-0 flex flex-col items-end gap-1">
+                    <span
+                      className="rounded-full px-2.5 py-0.5 text-xs font-bold"
+                      style={{
+                        color: inv.roiColor,
+                        background: `${inv.roiColor}18`,
+                        border: `1px solid ${inv.roiColor}30`,
+                      }}
+                    >
+                      {inv.roi}
+                    </span>
+                    <span className="text-[10px] text-slate-600 uppercase tracking-wide">
+                      ROI
+                    </span>
+                  </div>
+
+                  {/* Arrow */}
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
-                    className="h-4 w-4 flex-shrink-0 text-slate-600 group-hover:text-cyan-400 transition"
+                    className="flex-shrink-0 h-4 w-4 text-slate-600 transition group-hover:text-cyan-400 group-hover:translate-x-0.5"
                     aria-hidden="true"
                   >
                     <path
@@ -812,11 +1137,11 @@ export default function GoGrabXFleetTracking() {
               ))}
             </div>
 
-            <p className="mt-5 text-center text-xs text-slate-600">
-              Investor access · Tanuku · West Godavari
-            </p>
-
-            <div className="mt-6 border-t border-slate-800 pt-5 text-center">
+            {/* Footer actions */}
+            <div className="mt-8 pt-6 border-t border-slate-800/70 flex items-center justify-between">
+              <p className="text-xs text-slate-600">
+                EV Fleet · West Godavari, AP
+              </p>
               <button
                 type="button"
                 data-ocid="login.admin_access.button"
@@ -829,8 +1154,8 @@ export default function GoGrabXFleetTracking() {
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   // ── Render: Admin Login ───────────────────────────────────────────────────
   const renderAdminLogin = () => (
